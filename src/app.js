@@ -3,8 +3,9 @@ import Zdog from 'zdog';
 // TAU
 const TAU = Zdog.TAU;
 
-// Hips
-let hipX = 3;
+// Body sizing
+let hipX    = 3;
+let armSize = 6;
 
 // Rotating flag variable
 let isSpinning = true;
@@ -50,6 +51,7 @@ new Zdog.Rect({
 let illo2 = new Zdog.Illustration({
     element: '.zdog-canvas2',
     zoom: 5,
+    rotate: { y: -TAU/8 },
     dragRotate: true,
 });
 
@@ -57,8 +59,15 @@ let illo2 = new Zdog.Illustration({
 let hips = new Zdog.Shape({
     addTo: illo2,
     path: [{ x: -hipX }, { x: hipX}],
+    translate: { y: 2 },
     stroke: 4,
     color: eggplant,
+});
+
+// Anchor for rotating just the upper body
+let spine = new Zdog.Anchor({
+    addTo: hips,
+    rotate: { x: TAU/8 },
 });
 
 // Leg
@@ -66,6 +75,7 @@ let leg = new Zdog.Shape({
     addTo: hips,
     path: [{ y: 0 }, { y: 12 }],
     translate: { x: -hipX },
+    rotate: { x: TAU/4 },
     color: eggplant,
     stroke: 4,
 });
@@ -83,13 +93,22 @@ let foot = new Zdog.RoundedRect({
     stroke: 4,
 });
 
-leg.copyGraph({
+// Left Leg
+let standLeg = leg.copy({
     translate: { x: hipX },
+    rotate: { x: -TAU/8 },
 });
+
+// Left leg foot
+foot.copy({
+    addTo: standLeg,
+    rotate: { x: -TAU/8 },
+});
+
 
 // Chest
 let chest = new Zdog.Shape({
-    addTo: hips,
+    addTo: spine,
     path: [{ x: -1.5 }, { x: 1.5 }],
     translate: { y: -6.5 },
     stroke: 9,
@@ -122,7 +141,7 @@ eye.copy({
 });
 
 // Mouth
-let mouth = new Zdog.Ellipse({
+new Zdog.Ellipse({
     addTo: head,
     diameter: 3,
     quarters: 2,
@@ -133,6 +152,40 @@ let mouth = new Zdog.Ellipse({
     stroke: 0.5,
     fill: true,
     backface: false,
+});
+
+// Left arm
+let upperArm = new Zdog.Shape({
+    addTo: chest,
+    path: [{ y: 0 }, { y: armSize }],
+    translate: { x: -5, y: -2 },
+    rotate: { x: -TAU/4 },
+    color: eggplant,
+    stroke: 4,
+});
+
+// Left forearm
+let forearm = new Zdog.Shape({
+    addTo: upperArm,
+    path: [{ y: 0 }, { y: armSize }],
+    translate: { y: armSize },
+    rotate: { x: TAU/8 },
+    color: gold,
+    stroke: 4,
+});
+
+// Left Hand
+new Zdog.Shape({
+    addTo: forearm,
+    translate: { y: armSize, z: 1 },
+    stroke: 6,
+    color: gold,
+});
+
+// Right arm
+upperArm.copyGraph({
+    translate: { x: 5, y: -2 },
+    rotate: { x: TAU/4 },
 });
 
 function animate() {
