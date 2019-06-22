@@ -1,0 +1,29 @@
+{
+  "name": "3d-zdog",
+  "version": "1.0.0",
+  "description": "Testing Zdog 3D Javascript engine.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtotty/3d-zdog.git"
+  },
+  "author": "James Totty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jtotty/3d-zdog/issues"
+  },
+  "homepage": "https://github.com/jtotty/3d-zdog#readme",
+  "dependencies": {
+    "zdog": "^1.1.0"
+  },
+  "devDependencies": {
+    "imports-loader": "^0.8.0",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
