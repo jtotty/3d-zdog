@@ -1,15 +1,15 @@
 import RingSquare from './models/ringSquare';
 import HappyMan from './models/happyMan';
 
-const ringSquare = new RingSquare('.zdog-canvas1');
-const happyMan = new HappyMan('.zdog-canvas2');
+const RingSquare = new RingSquare('.zdog-canvas1');
+const HappyMan = new HappyMan('.zdog-canvas2');
 
 function animate() {
     // Rotate ringSquare each frame
-    if (ringSquare.isSpinning) ringSquare.illo.rotate.y += 0.01;
+    if (RingSquare.isSpinning) RingSquare.illo.rotate.y += 0.01;
 
-    ringSquare.illo.updateRenderGraph();
-    happyMan.illo.updateRenderGraph();
+    RingSquare.illo.updateRenderGraph();
+    HappyMan.illo.updateRenderGraph();
 
     // Animate next frame
     requestAnimationFrame(animate);
